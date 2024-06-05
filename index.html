@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./asset/iconfont/iconfont.css">
-    <title>Document</title>
+    <title>丹妮Zone</title>
 </head>
 
 <body>
@@ -36,8 +36,8 @@
             </div>
             <div class="info-right">
                 <div class="music-name">
-                    <span class="name">Letting go</span>
-                    <span class="musician">汪苏泷/金若晨</span>
+                    <span class="name">星空はミステリアス5 (神秘星空5)</span>
+                    <span class="musician">有泽孝纪 (ありさわ たかのり)</span>
                 </div>
                 <div class="playback-setting">
                     <span class="iconfont icon-next previous"></span>
@@ -89,26 +89,15 @@
     const musicList = [{
         musicSrc: './asset/music/music-1.mp3',
         musicPic: './asset/music/music-1.jpg',
-        musician: '汪苏泷/金若晨',
-        musicName: 'Letting go'
+        musician: '有泽孝纪 (ありさわ たかのり)',
+        musicName: '星空はミステリアス5 (神秘星空5)'
     },
         {
             musicSrc: './asset/music/music-2.mp3',
             musicPic: './asset/music/music-2.jpg',
-            musician: 'The Chainsmokers/Halsey/R3HAB',
-            musicName: 'Closer',
-        },
-        {
-            musicSrc: './asset/music/music-3.mp3',
-            musicPic: './asset/music/music-3.jpg',
-            musician: 'ILLENIUM,Nevve',
-            musicName: 'Fractures',
-        },
-        {
-            musicSrc: './asset/music/music-4.mp3',
-            musicPic: './asset/music/music-4.jpg',
-            musician: 'Daniel Powter',
-            musicName: 'Free Loop'
+            musician: '群星',
+            musicName: 'Wonderful A Blue World',
+
         }
     ]
 
@@ -116,7 +105,15 @@
     let timeArr = []
     let lrcArr = []
     let insertLrcStr = ''
-    const str = lyricStr.split('\n')
+    let str
+    switch (nowPlayIndex){
+        case 0:
+            str = lyricStr1.split('\n');
+            break;
+        case 1:
+            str = lyricStr2.split('\n');
+            break;
+    }
     str.forEach(item => {
         const splitLyc = item.split(']')
         timeArr.push(timeFormat(splitLyc[0].substr(1, splitLyc[0].length - 4)))
@@ -124,7 +121,7 @@
         insertLrcStr += `<li>${lrcArr[lrcArr.length - 1]}</li>`
     })
     lycContent.innerHTML = insertLrcStr
-
+    updateLyrics();
     // 添加滚动事件
     audio.addEventListener('timeupdate', function () {
         lycSlide()
@@ -201,22 +198,31 @@
 
     // 上一首
     function previousMusic() {
+        timeArr = []; // 清空timeArr
+        lrcArr = [];  // 清空lrcArr
+        insertLrcStr = '';
+
         if (nowPlayIndex == 0) {
-            nowPlayIndex = musicList.length - 1
+            nowPlayIndex = musicList.length - 1;
         } else {
-            nowPlayIndex--
+            nowPlayIndex--;
         }
-        setMusic(nowPlayIndex)
+        setMusic(nowPlayIndex);
+        updateLyrics();
     }
 
     // 下一首
-    function nextMusic() {
+    function nextMusic() { timeArr = []; // 清空timeArr
+        lrcArr = [];  // 清空lrcArr
+        insertLrcStr = '';
+
         if (nowPlayIndex == musicList.length - 1) {
-            nowPlayIndex = 0
+            nowPlayIndex = 0;
         } else {
-            nowPlayIndex++
+            nowPlayIndex++;
         }
-        setMusic(nowPlayIndex)
+        setMusic(nowPlayIndex);
+        updateLyrics();
     }
 
     // 显示歌词
@@ -233,6 +239,24 @@
             showLycFlag = false
         }
     })
+    // 更新歌词
+    function updateLyrics() {
+        switch (nowPlayIndex) {
+            case 0:
+                str = lyricStr1.split('\n');
+                break;
+            case 1:
+                str = lyricStr2.split('\n');
+                break;
+        }
+        str.forEach(item => {
+            const splitLyc = item.split(']')
+            timeArr.push(timeFormat(splitLyc[0].substr(1, splitLyc[0].length - 4)))
+            lrcArr.push(splitLyc[1])
+            insertLrcStr += `<li>${lrcArr[lrcArr.length - 1]}</li>`
+        })
+        lycContent.innerHTML = insertLrcStr;
+    }
 
     // 加载完MP3需要设置时间显示与进度条监听
     audio.addEventListener("canplay", function () {

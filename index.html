@@ -304,17 +304,7 @@
     nextBtn.addEventListener('click', function () {
         nextMusic()
     })
-    //网页加载完毕后自动播放音乐
-    document.addEventListener('DOMContentLoaded', function () {
 
-        audio.addEventListener('canplay', function () {
-            musicInfo.style.display = 'block';
-            lyricMask.style.display = 'block';
-            infoLeft.style.width = '100%';
-            showLycFlag = true;
-            playMusic();
-        });
-    });
 </script>
 
 </html>

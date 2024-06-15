@@ -14,7 +14,7 @@
 
 <div class="music-player-wrapper">
     <div class="music-player">
-        <audio src="./asset/music/music-1.mp3" id="audio"></audio>
+        <audio src="asset/music/music-1.mp3" id="audio"></audio>
         <div class="top-bar">
             <span class="iconfont icon-24gl-volumeMiddle"></span>
             <div class="progress-bar sound-progress-bar">
@@ -27,7 +27,7 @@
         </div>
         <div class="music-info">
             <div class="info-left">
-                <img class="music-img" src="./asset/music/music-1.jpg" alt="">
+                <img class="music-img" src="asset/music/music-1.jpg" alt="">
                 <div class="lyric-mask">
                     <div class="lyric-wrapper">
                         <ul id="lyc-content"></ul>
@@ -36,8 +36,8 @@
             </div>
             <div class="info-right">
                 <div class="music-name">
-                    <span class="name">星空はミステリアス5 (神秘星空5)</span>
-                    <span class="musician">有泽孝纪 (ありさわ たかのり)</span>
+                    <span class="name">エピローグ(ムーンライト伝説)</span>
+                    <span class="musician">小坂明子</span>
                 </div>
                 <div class="playback-setting">
                     <span class="iconfont icon-next previous"></span>
@@ -84,17 +84,25 @@
 
     let showLycFlag = true
 
-    //变量 
+    //变量
     let duration, nowPlayIndex = 0
-    const musicList = [{
-        musicSrc: './asset/music/music-1.mp3',
-        musicPic: './asset/music/music-1.jpg',
+    const musicList = [
+        {
+            musicSrc: './asset/music/music-1.mp3',
+            musicPic: './asset/music/music-1.jpg',
+            musician: '小坂明子',
+            musicName: 'エピローグ(ムーンライト伝説)'
+        },
+        {
+
+        musicSrc: './asset/music/music-2.mp3',
+        musicPic: './asset/music/music-2.jpg',
         musician: '有泽孝纪 (ありさわ たかのり)',
         musicName: '星空はミステリアス5 (神秘星空5)'
     },
         {
-            musicSrc: './asset/music/music-2.mp3',
-            musicPic: './asset/music/music-2.jpg',
+            musicSrc: './asset/music/music-3.mp3',
+            musicPic: './asset/music/music-3.jpg',
             musician: '群星',
             musicName: 'Wonderful A Blue World',
         }
@@ -111,6 +119,9 @@
             break;
         case 1:
             str = lyricStr2.split('\n');
+            break;
+        case 2:
+            str = lyricStr3.split('\n');
             break;
     }
     str.forEach(item => {
@@ -248,6 +259,9 @@
                 break;
             case 1:
                 str = lyricStr2.split('\n');
+                break;
+            case 2:
+                str = lyricStr3.split('\n');
                 break;
         }
         str.forEach(item => {

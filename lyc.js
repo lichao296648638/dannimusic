@@ -1,6 +1,6 @@
 const lyricStr1 = `[00:00.00]暂无歌词`
-
-const lyricStr2 = `[00:00.50]Wonderful A Blue World
+const lyricStr2 = `[00:00.00]暂无歌词`
+const lyricStr3 = `[00:00.50]Wonderful A Blue World
 [00:10.94]蓝蓝天空
 [00:11.60]太阳公公
 [00:15.48]小狗追着小蜜蜂
